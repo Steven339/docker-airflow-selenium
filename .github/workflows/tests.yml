@@ -34,5 +34,6 @@ jobs:
         pytest dags --black -v
     - name: Test with Pytest
       run: |
+        pipenv shell
         pip install pytest
         pytest
