@@ -10,17 +10,17 @@ default_args = {
     # 'wait_for_downstream': True,
     "start_date": datetime.now(),
     "retries": 3,
-    "retries_delay": timedelta(minutes=5)
+    "retries_delay": timedelta(minutes=5),
 }
 
 dag = DAG(
     "example_task", schedule_interval=None, default_args=default_args, concurrency=2
 )
 
-start = EmptyOperator(task_id='start', dag=dag)
+start = EmptyOperator(task_id="start", dag=dag)
 
 processed = SeleniumOperator(
-    script=example_task, script_args=[], task_id='processed', dag=dag
+    script=example_task, script_args=[], task_id="processed", dag=dag
 )
 
 end = EmptyOperator(task_id="end", dag=dag)
