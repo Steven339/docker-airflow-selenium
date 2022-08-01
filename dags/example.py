@@ -6,7 +6,7 @@ from scripts.selenium_scripts.example import example_task
 from datetime import datetime, timedelta
 
 default_args = {
-    "owner": "brayan.correa",
+    "owner": "steven339",
     # 'wait_for_downstream': True,
     "start_date": datetime.now(),
     "retries": 3,
