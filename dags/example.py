@@ -6,34 +6,23 @@ from scripts.selenium_scripts.example import example_task
 from datetime import datetime, timedelta
 
 default_args = {
-    'owner': 'brayan.correa',
+    "owner": "brayan.correa",
     # 'wait_for_downstream': True,
-    'start_date': datetime.now(),
-    'retries': 3,
-    'retries_delay': timedelta(minutes=5)
+    "start_date": datetime.now(),
+    "retries": 3,
+    "retries_delay": timedelta(minutes=5)
 }
 
 dag = DAG(
-    'example_task',
-    schedule_interval=None,
-    default_args=default_args, concurrency=2
+    "example_task", schedule_interval=None, default_args=default_args, concurrency=2
 )
 
-start = EmptyOperator(
-    task_id='start',
-    dag=dag
-)
+start = EmptyOperator(task_id='start', dag=dag)
 
 processed = SeleniumOperator(
-    script=example_task,
-    script_args=[],
-    task_id='processed',
-    dag=dag
+    script=example_task, script_args=[], task_id='processed', dag=dag
 )
 
-end = EmptyOperator(
-    task_id='end',
-    dag=dag,
-)
+end = EmptyOperator(task_id="end", dag=dag)
 
 start >> processed >> end
