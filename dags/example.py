@@ -1,7 +1,7 @@
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 
-from plugins.selenium_plugin.operators.selenium_operator import SeleniumOperator
+from plugins.selenium_plugin import SeleniumOperator
 from scripts.selenium_scripts.example import example_task
 from datetime import datetime, timedelta
 
