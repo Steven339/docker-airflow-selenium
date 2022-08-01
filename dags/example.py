@@ -11,7 +11,7 @@ from airflow.models import Variable
 default_args = {
     'owner': 'brayan.correa',
     # 'wait_for_downstream': True,
-    'start_date': datetime(2021, 6, 22),
+    'start_date': datetime.now(),
     'retries': 0,
     'retries_delay': timedelta(minutes=5)
 }
