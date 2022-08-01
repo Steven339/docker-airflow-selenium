@@ -1,12 +1,9 @@
-import json
-
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 
 from plugins.selenium_plugin.operators.selenium_operator import SeleniumOperator
 from scripts.selenium_scripts.example import example_task
 from datetime import datetime, timedelta
-from airflow.models import Variable
 
 default_args = {
     'owner': 'brayan.correa',

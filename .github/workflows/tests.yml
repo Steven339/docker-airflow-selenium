@@ -1,4 +1,4 @@
-name: Test DAGs
+name: Tests
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
     - name: Lint with Flake8
       run: |
         pip install flake8
-        flake8 --ignore E501 dags --benchmark -v
+        flake8 --ignore E501 * --benchmark -v
     - name: Confirm Black code compliance (psf/black)
       run: |
         pip install pytest-black
