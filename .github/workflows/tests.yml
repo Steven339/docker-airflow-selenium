@@ -25,7 +25,7 @@ jobs:
         pipenv install
     - name: Lint with Flake8
       run: |
-        pipenv pip install flake8
+        pipenv run pip install flake8
         pipenv run flake8 --ignore E501 dags --benchmark -v
         pipenv run flake8 --ignore E501 scripts --benchmark -v
     - name: Confirm Black code compliance (psf/black)
