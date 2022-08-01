@@ -12,7 +12,7 @@ default_args = {
     'owner': 'brayan.correa',
     # 'wait_for_downstream': True,
     'start_date': datetime.now(),
-    'retries': 0,
+    'retries': 3,
     'retries_delay': timedelta(minutes=5)
 }
 
