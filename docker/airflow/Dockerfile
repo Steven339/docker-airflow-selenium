@@ -1,7 +1,14 @@
 FROM apache/airflow:2.3.3-python3.9
 USER airflow
-RUN pip install 'pipenv'
-RUN pipenv install
+RUN pip install 'apache-airflow[celery]'
+RUN pip install 'apache-airflow-providers-apache-spark'
+RUN pip install 'apache-airflow-providers-mongo'
+RUN pip install 'pymongo'
+RUN pip install 'fake_useragent'
+RUN pip install 'selenium'
+RUN pip install 'beautifulsoup4'
+RUN pip install 'docker'
+RUN pip install 'lxml'
 
 ARG AIRFLOW_USER_HOME=/opt/airflow
 ENV PYTHONPATH=$PYTHONPATH:${AIRFLOW_USER_HOME}
@@ -19,10 +26,3 @@ RUN apt-get update -yqq && \
     apt-get install -y unixodbc unixodbc-dev && \
     ACCEPT_EULA=Y apt-get install -y msodbcsql17 && \
     ACCEPT_EULA=Y apt-get install mssql-tools
-
-USER root
-
-#RUN usermod -aG 0 airflow
-USER root
-
-#RUN mkdir downloads

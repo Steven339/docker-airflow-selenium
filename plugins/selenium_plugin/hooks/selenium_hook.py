@@ -27,11 +27,8 @@ class SeleniumHook(BaseHook):
         logging.info('creating_container')
         self.downloads = 'downloads'  # test named volume
         self.sel_downloads = '/home/airflow/downloads'
-        volumes = ['{}:{}'.format(self.downloads,
-                                  self.sel_downloads),
-                   '/dev/shm:/dev/shm']
         client = docker.from_env()
-        container = client.containers.run('docker_selenium:latest',
+        container = client.containers.run('docker_airflow_selenium_docker_selenium:latest',
                                           # volumes=volumes,
                                           network='container_bridge',
                                           detach=True, shm_size='2G')

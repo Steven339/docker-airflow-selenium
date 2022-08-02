@@ -15,7 +15,7 @@ x-airflow-common:
     - logs-volume:/opt/airflow/logs
     - ./dags:/opt/airflow/dags
     - ./plugins:/opt/airflow/plugins
-  user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-50000}"
+  user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     redis:
       condition: service_healthy
@@ -71,6 +71,8 @@ services:
       timeout: 10s
       retries: 5
     restart: always
+    depends_on:
+      - docker_selenium
 
   airflow-scheduler:
     <<: *airflow-common
@@ -86,6 +88,8 @@ services:
       timeout: 10s
       retries: 5
     restart: always
+    depends_on:
+      - docker_selenium
 
 
   airflow-worker:
@@ -103,7 +107,7 @@ services:
     healthcheck:
       test:
         - "CMD-SHELL"
-        - 'celery --cian_parser airflow.executors.celery_executor.cian_parser inspect ping -d "celery@$${HOSTNAME}"'
+        - 'celery --app airflow.executors.celery_executor.app inspect ping -d "celery@$${HOSTNAME} --pidfile=/opt/airflow/airflow-worker.pid"'
       interval: 10s
       timeout: 10s
       retries: 5
@@ -111,6 +115,8 @@ services:
       - default
       - container_bridge
     restart: always
+    depends_on:
+      - docker_selenium
 
 
   airflow-init:
@@ -122,6 +128,8 @@ services:
       _AIRFLOW_WWW_USER_CREATE: 'true'
       _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
       _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
+    depends_on:
+      - docker_selenium
 
   flower:
     <<: *airflow-common
@@ -134,6 +142,8 @@ services:
       timeout: 10s
       retries: 5
     restart: always
+    depends_on:
+      - docker_selenium
 
 
 volumes:
